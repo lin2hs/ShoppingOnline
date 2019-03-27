@@ -173,6 +173,8 @@ public class ShoppingController {
                     return new ModelAndView("../shop/error", "message", "The remain amount is not enough for your order. We're sorry about that!");
                 }
                 product.setAmount(tmpAmount);
+                order.setBill(bill);
+                orderRepository.save(order);
                 productRepository.save(product);
             }
             //After calculate total price and save all orders, update bill
