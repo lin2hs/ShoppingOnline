@@ -152,7 +152,8 @@ public class ProductController {
         product.setThumnail(fileName);
         //Save product
         productRepository.save(product);
-        return new ModelAndView("/product/index");
+        mm.put("message", "Congratulations, create product successfully!");
+        return index(null, null, null, mm);
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.GET)
@@ -167,23 +168,25 @@ public class ProductController {
     public ModelAndView edit(@Valid @ModelAttribute("product") Product product,
             BindingResult result, @Validated FileModel file, ModelMap mm) throws SQLException, IOException {
         if (result.hasErrors()) {
+            mm.put("message", "There is some erros, please try again later!");
             return edit(product.getId(), mm);
         }
 
         //Upload file
         MultipartFile multipartFile = file.getFile();
-        String uploadPath = context.getRealPath("") + File.separator + "images" + File.separator;
-        FileCopyUtils.copy(file.getFile().getBytes(), new File(uploadPath + file.getFile().getOriginalFilename()));
-        String fileName = multipartFile.getOriginalFilename();
-        if (fileName.equals("")) {
+        if (file.getFile().getOriginalFilename().equals("")) {
             product.setThumnail(product.getThumnail());
         } else {
+            String uploadPath = context.getRealPath("") + File.separator + "images" + File.separator;
+            FileCopyUtils.copy(file.getFile().getBytes(), new File(uploadPath + file.getFile().getOriginalFilename()));
+            String fileName = multipartFile.getOriginalFilename();
             //Set thumnail is file path on server
             product.setThumnail(fileName);
         }
         //Save product
         productRepository.save(product);
-        return new ModelAndView("/product/index");
+        mm.put("message", "Edit product successfully!");
+        return index(null, null, null, mm);
     }
 
     @RequestMapping(value = "/details", method = RequestMethod.GET)
@@ -196,6 +199,7 @@ public class ProductController {
     public ModelAndView delete(@RequestParam(value = "id", required = false) int id,
             ModelMap mm) throws SQLException {
         productRepository.delete(id);
-        return new ModelAndView("/product/index");
+        mm.put("message", "Delete product successfully!");
+        return index(null, null, null, mm);
     }
 }

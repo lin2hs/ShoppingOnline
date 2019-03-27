@@ -40,7 +40,10 @@
                         </div>
                     </form:form>
                 </div>
-
+                <div class="row">
+                <div class="col-md-4 col-md-offset-4">
+                    <p style="color: red">${message}</p>
+                </div>
             </div>
 
         </div>
