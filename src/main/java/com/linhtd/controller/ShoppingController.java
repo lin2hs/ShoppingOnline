@@ -142,7 +142,7 @@ public class ShoppingController {
         //Get current cart which is stored in session
         List<Cart> currentCart = (List<Cart>) session.getAttribute("currentCart");
         if (currentCart == null) {
-            return new ModelAndView("../home/index");
+            return new ModelAndView("./home/index");
         } else {
             Bill bill = new Bill();
             //Find user by username
@@ -159,7 +159,7 @@ public class ShoppingController {
                 //Check lastest DB with in-cart product and category
                 if (productRepository.findOne(currentCart.get(i).getProduct().getId()) == null
                         || categoryRepository.findOne(currentCart.get(i).getProduct().getCategory().getId()) == null) {
-                    return new ModelAndView("../shop/error", "message", "Product or Category was deleted, we're sorry about that!");
+                    return new ModelAndView("/shop/error", "message", "Product or Category was deleted, we're sorry about that!");
                 }
                 //Get lastest product data
                 product = productRepository.findOne(currentCart.get(i).getProduct().getId());
@@ -170,7 +170,7 @@ public class ShoppingController {
                 //Update amount of productt
                 int tmpAmount = product.getAmount() - currentCart.get(i).getQuantity();
                 if(tmpAmount < 0) {
-                    return new ModelAndView("../shop/error", "message", "The remain amount is not enough for your order. We're sorry about that!");
+                    return new ModelAndView("/shop/error", "message", "The remain amount is not enough for your order. We're sorry about that!");
                 }
                 product.setAmount(tmpAmount);
                 order.setBill(bill);
@@ -183,7 +183,7 @@ public class ShoppingController {
             billRepository.save(bill);
             currentCart.clear();
         }
-        return new ModelAndView("../home/index", "currentCart", currentCart);
+        return new ModelAndView("/home/index", "currentCart", currentCart);
     }
 
 }

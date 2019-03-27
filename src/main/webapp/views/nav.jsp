@@ -30,6 +30,9 @@
                     <li>
                         <a href="../product/index">Product</a>
                     </li>
+                    <li>
+                        <a href="../user/index">User</a>
+                    </li>
                 </sec:authorize>
             </ul>
             <ul class="nav navbar-nav navbar-right">

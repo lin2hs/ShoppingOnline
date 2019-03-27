@@ -52,7 +52,7 @@ public class Product implements Serializable{
     private double price;
     
     @NotNull
-    @Min(value = 0, message = "Must bigger than 0")
+    @Min(value = 0)
     @Max(value = Long.MAX_VALUE, message = "Mus less than " + Long.MAX_VALUE)
     @Digits(integer = Integer.MAX_VALUE, fraction = 0)
     @Column(name = "amount")

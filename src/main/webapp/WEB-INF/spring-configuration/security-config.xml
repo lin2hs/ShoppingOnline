@@ -26,6 +26,10 @@
         <intercept-url pattern="/product/delete**" access="ROLE_ADMIN"/>
         <intercept-url pattern="/shop/payment**" access="ROLE_ADMIN"/>
         <intercept-url pattern="/shop/payment**" access="ROLE_USER"/>
+        <intercept-url pattern="/user/index**" access="ROLE_ADMIN"/>
+        <intercept-url pattern="/user/details**" access="ROLE_ADMIN"/>
+        <intercept-url pattern="/user/delete**" access="ROLE_ADMIN"/>
+        <intercept-url pattern="/user/edit**" access="ROLE_ADMIN"/>
         
         <form-login login-processing-url="/j_spring_security_check" login-page="/auth/login" default-target-url="/home/index"
             authentication-failure-url="/auth/login?authfailed" username-parameter="username"

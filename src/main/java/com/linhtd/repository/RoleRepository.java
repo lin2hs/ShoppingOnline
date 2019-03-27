@@ -6,7 +6,10 @@
 package com.linhtd.repository;
 
 import com.linhtd.entity.Role;
+import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 /**
  *
@@ -14,4 +17,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface RoleRepository extends JpaRepository<Role, Integer>{
     
+    @Query(value = "SELECT r FROM Role r WHERE LOWER(r.username) LIKE CONCAT('%',LOWER(:username),'%')")
+    public List<Role> findByUsername(@Param("username") String username);
 }
